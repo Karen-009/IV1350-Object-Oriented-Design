@@ -6,7 +6,7 @@ import se.kth.iv1350.repairelectricbike.integration.Printer;
 import se.kth.iv1350.repairelectricbike.integration.RegistryCreator;
 
 /**
- * Starts the entire application and contains the main method used to initiate
+ * Performs the startup of the entire application and contains the <code>main</code> method used to initiate
  * controller, view and integration.
  */
 
