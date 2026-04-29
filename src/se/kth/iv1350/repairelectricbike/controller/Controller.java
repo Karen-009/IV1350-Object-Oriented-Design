@@ -52,12 +52,8 @@ public class Controller {
      */
 
     public void acceptRepairOrder(String repairOrderID) {
-        RepairOrder repairOrder = repairOrderRegistry.getRepairOrder(repairOrderID);
-        repairOrder.acceptRepairOrder();
-
-        repairOrderRegistry.updateRepairOrder(repairOrder);
-
-        RepairOrderDTO orderData = repairOrder.toDTO();
-        printer.printRepairOrder(orderData);
+        repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderID);
+        repairOrder.acceptRepairOrder(repairOrderRegistry);
+        printer.printRepairOrder(repairOrder.getRepairOrderDTO());
     }
 }

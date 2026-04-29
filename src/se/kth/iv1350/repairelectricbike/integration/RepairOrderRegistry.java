@@ -33,6 +33,22 @@ public class RepairOrderRegistry {
     }
 
     /**
+     * Finds the repair order with the specified ID.
+     *
+     * @param repairOrderId The ID of the repair order to find.
+     * @return The repair order with the specified ID,
+     *         or null if no such order exists.
+     */
+    public RepairOrder findRepairOrderById(String repairOrderId) {
+        for (RepairOrder order : repairOrders) {
+            if (order.getId().equals(repairOrderId)) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Finds and retrieves all the repaird orders in the system.
      * 
      * @return A list of DTOs that represent every repair order in the system.

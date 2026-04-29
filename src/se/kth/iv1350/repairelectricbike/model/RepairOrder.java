@@ -18,4 +18,17 @@ public class RepairOrder {
     private String estimatedCompletionDate;
     private RepairOrderState state;
 
+    /**
+     * Accepts this repair order. The state is changed to
+     * Accepted and the registry is updated to reflect the new state.
+     *
+     * @param registry The registry used to persist the
+     *                 updated repair order.
+     */
+    public void acceptRepairOrder(RepairOrderRegistry registry) {
+        this.state = RepairOrderState.ACCEPTED;
+        registry.updateRepairOrder(this.getRepairOrderDTO());
+    }
 }
+
+
