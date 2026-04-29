@@ -45,6 +45,10 @@ public class Controller {
         return CustomerRegistry.findCustomer(phoneNumber);
     }
 
+    public RepairOrderDTO findRepairOrder(String phoneNumber){
+        return repairOrderRegistry.findRepairOrder(phoneNumber);
+    }
+
     /**
      * Accepts a specific repair order.
      * 
