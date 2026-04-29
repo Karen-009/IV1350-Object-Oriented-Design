@@ -20,7 +20,7 @@ public class RegistryCreator {
     /**
      * Get the value of repairOrderRegistry
      * 
-     * @return the value of customerRegistry
+     * @return the value of repairOrderRegistry
      */
     public RepairOrderRegistry getRepairOrderRegistry() {
         return repairOrderRegistry;
