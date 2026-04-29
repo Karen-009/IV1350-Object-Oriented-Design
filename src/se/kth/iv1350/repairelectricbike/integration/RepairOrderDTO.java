@@ -9,6 +9,7 @@ package se.kth.iv1350.repairelectricbike.integration;
  */
 public final class RepairOrderDTO {
     private final String id;
+    private final String phoneNumber;
     private final String date;
     private final String customersProblemDescription;
     private final String estimatedCompletionDate;
@@ -18,15 +19,17 @@ public final class RepairOrderDTO {
      * Creates a new instance.
      * 
      * @param id                          The repair order ID.
+     * @param phoneNumber                 The customers phone number.
      * @param date                        The date the order was created.
      * @param customersProblemDescription Description provided by customer.
      * @param estimatedCompletionDate     Expected finish date.
      * @param state                       The current status of the repair.
      */
 
-    public RepairOrderDTO(String id, String date, String customersProblemDescription,
+    public RepairOrderDTO(String id, String phoneNumber, String date, String customersProblemDescription,
             String estimatedCompletionDate, RepairOrderState state) {
         this.id = id;
+        this.phoneNumber = phoneNumber;
         this.date = date;
         this.customersProblemDescription = customersProblemDescription;
         this.estimatedCompletionDate = estimatedCompletionDate;
@@ -41,21 +44,21 @@ public final class RepairOrderDTO {
     }
 
     /**
-     * @return The current state of the repair order.
+     * @return The customer's phone number.
      */
-    public RepairOrderState getState() {
-        return state;
-    }  
-    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     /**
-     * @return The date the repair order was created.
+     * @return The date the order was created.
      */
     public String getDate() {
         return date;
     }
 
     /**
-     * @return The customer's problem description.
+     * @return The description of the customers problem.
      */
     public String getCustomersProblemDescription() {
         return customersProblemDescription;
@@ -68,10 +71,11 @@ public final class RepairOrderDTO {
         return estimatedCompletionDate;
     }
 
-    @Override
-    public String toString() {
-        return "RepairOrder[id=" + id
-               + ", state=" + state
-               + ", problem=" + customersProblemDescription + "]";
-    }
+    /**
+     * @return The current status of the repair.
+     */
+
+    public RepairOrderState getState() {
+        return state;
+    }  
 }
