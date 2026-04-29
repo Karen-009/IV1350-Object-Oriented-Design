@@ -33,16 +33,45 @@ public final class RepairOrderDTO {
         this.state = state;
     }
 
+    /**
+     * @return The repair order ID.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @return The current state of the repair order.
+     */
     public RepairOrderState getState() {
         return state;
+    }  
+    
+    /**
+     * @return The date the repair order was created.
+     */
+    public String getDate() {
+        return date;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    /**
+     * @return The customer's problem description.
+     */
+    public String getCustomersProblemDescription() {
+        return customersProblemDescription;
     }
 
+    /**
+     * @return The estimated completion date.
+     */
+    public String getEstimatedCompletionDate() {
+        return estimatedCompletionDate;
+    }
+
+    @Override
+    public String toString() {
+        return "RepairOrder[id=" + id
+               + ", state=" + state
+               + ", problem=" + customersProblemDescription + "]";
+    }
 }

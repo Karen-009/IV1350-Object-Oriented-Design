@@ -20,6 +20,7 @@ public final class CustomerDTO {
      * @param bikeBrand     Description of the customers bikebrand.
      * @param bikeModel     Description of the customers bike model.
      * @param bikeSeriallNo The customer bikes serial number.
+     * @param phoneNumber  The customer's phone number.
      */
 
     public CustomerDTO(String name, String email, String bikeBrand, String bikeModel, String bikeSeriallNo, String phoneNumber) {
