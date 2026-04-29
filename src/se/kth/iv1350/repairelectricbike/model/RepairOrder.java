@@ -29,6 +29,11 @@ public class RepairOrder {
         this.state = RepairOrderState.ACCEPTED;
         registry.updateRepairOrder(this.getRepairOrderDTO());
     }
+
+    public void addDiagnosticResult(DiagnosticTaskDTO diagTaskResult) {
+        diagnosticResults.add(diagTaskResult);
+        this.state = RepairOrderState.READY_FOR_APPROVAL;
+    }
 }
 
 

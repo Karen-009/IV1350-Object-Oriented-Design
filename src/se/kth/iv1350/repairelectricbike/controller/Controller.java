@@ -54,6 +54,12 @@ public class Controller {
         return repairOrderRegistry.findAllRepairOrders();
     }
 
+    public void addDiagnosticResult(String repairOrderId, DiagnosticTaskDTO diagTaskResult) {
+        repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
+        repairOrder.addDiagnosticResult(diagTaskResult);
+        repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
+    }
+
     /**
      * Accepts a specific repair order.
      * 
