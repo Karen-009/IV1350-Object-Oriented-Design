@@ -68,9 +68,9 @@ public class RepairOrderRegistry {
      * * @param updatedRepairOrder The DTO containing the updated information.
      */
     public void updateRepairOrder(RepairOrderDTO updaterepairOrder) {
-        for (int i = 0; i < repairOrders.size(); i++) {
-            if (repairOrders.get(i).getId().equals(updaterepairOrder.getId())) {
-                repairOrders.updateState(updaterepairOrder);
+        for (RepairOrder orders : repairOrders) {
+            if (orders.get().getId().equals(updaterepairOrder.getId())) {
+                orders.updateState(updaterepairOrder);
                 return;
             }
         }

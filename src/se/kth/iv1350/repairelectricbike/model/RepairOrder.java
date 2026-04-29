@@ -19,7 +19,7 @@ public class RepairOrder {
     private RepairOrderState state;
 
     /**
-     * Accepts this repair order. The state is changed to
+     * Acc epts this repair order. The state is changed to
      * Accepted and the registry is updated to reflect the new state.
      *
      * @param registry The registry used to persist the
@@ -47,7 +47,35 @@ public class RepairOrder {
         this.state = RepairOrderState.READY_FOR_APPROVAL;
     }
 
+    /**
+     * Updates the internal state of this entity using data from a DTO.
+     * * @param dto The data transfer object containing new information.
+     */
     public void updateState(RepairOrderDTO dto) {
         this.state = dto.getState();
+    }
+
+    /**
+     * Creates a DTO representing the current state.
+     * This allows the Registry and View to see the data without
+     * being able to modify the actual RepairOrder object.
+     * * @return A read-only snapshot of this repair order.
+     */
+    public RepairOrderDTO toDTO() {
+        return new RepairOrderDTO(
+                this.id,
+                this.phoneNumber,
+                this.date,
+                this.customersProblemDescription,
+                this.estimatedCompletionDate,
+                this.state);
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getId() {
+        return id;
     }
 }

@@ -32,4 +32,5 @@ public final class RepairOrderDTO {
         this.estimatedCompletionDate = estimatedCompletionDate;
         this.state = state;
     }
+
 }
