@@ -3,6 +3,7 @@ package se.kth.iv1350.repairelectricbike.controller;
 import java.util.List;
 
 import se.kth.iv1350.repairelectricbike.model.RepairOrder;
+import se.kth.iv1350.repairelectricbike.model.RepairTaskDTO;
 import se.kth.iv1350.repairelectricbike.model.DiagnosticTaskDTO;
 import se.kth.iv1350.repairelectricbike.model.Bike;
 import se.kth.iv1350.repairelectricbike.integration.RepairOrderDTO;
@@ -57,6 +58,11 @@ public class Controller {
     public void addDiagnosticResult(String repairOrderId, DiagnosticTaskDTO diagTaskResult) {
         repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         repairOrder.addDiagnosticResult(diagTaskResult);
+        repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
+    }
+
+    public void addRepairTask(String repairOrderId, RepairTaskDTO repairTask) {
+        repairOrder.addRepairTask(repairTask);
         repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
     }
 
