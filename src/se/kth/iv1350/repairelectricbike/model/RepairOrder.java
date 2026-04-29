@@ -34,6 +34,8 @@ public class RepairOrder {
         diagnosticResults.add(diagTaskResult);
         this.state = RepairOrderState.READY_FOR_APPROVAL;
     }
+
+    public void updateState(RepairOrderDTO dto) {
+        this.state = dto.getState();
+    }
 }
-
-

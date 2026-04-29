@@ -15,6 +15,7 @@ public class RepairOrderRegistry {
      * ~ <<create>> RepairOrderRegistry() that packages the constructor
      */
     RepairOrderRegistry() {
+        // Call
     }
 
     /**
@@ -35,9 +36,9 @@ public class RepairOrderRegistry {
     /**
      * Finds the repair order with the specified ID.
      *
-     * @param repairOrderId The ID of the repair order to find.
-     * @return The repair order with the specified ID,
-     *         or null if no such order exists.
+     * * @param repairOrderId The ID of the repair order to find.
+     * * @return The repair order with the specified ID,
+     * or null if no such order exists.
      */
     public RepairOrder findRepairOrderById(String repairOrderId) {
         for (RepairOrder order : repairOrders) {
@@ -68,9 +69,20 @@ public class RepairOrderRegistry {
      */
     public void updateRepairOrder(RepairOrderDTO updaterepairOrder) {
         for (int i = 0; i < repairOrders.size(); i++) {
-            if (repairOrders.get(i).getId().equals(updatedrepairOrder.getId())) {
+            if (repairOrders.get(i).getId().equals(updaterepairOrder.getId())) {
+                repairOrders.updateState(updaterepairOrder);
                 return;
             }
         }
+    }
+
+    /**
+     * + saveRepairOrder(repairOrder : RepairOrderDTO) : void
+     * Persists a new repair order.
+     * * @param repairOrder The DTO data to be saved.
+     */
+    public void saveRepairOrder(RepairOrderDTO repairOrder) {
+        RepairOrder newOrder = new RepairOrder(repairOrder);
+        repairOrders.add(newOrder);
     }
 }
