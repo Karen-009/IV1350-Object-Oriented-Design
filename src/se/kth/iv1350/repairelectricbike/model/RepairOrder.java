@@ -30,6 +30,18 @@ public class RepairOrder {
         registry.updateRepairOrder(this.getRepairOrderDTO());
     }
 
+        /**
+     * Rejects this repair order. The state is changed to
+     * Rejected and the registry is updated to reflect the new state.
+     *
+     * @param registry The registry used to persist the
+     *                 updated repair order.
+     */
+    public void rejectRepairOrder(RepairOrderRegistry registry) {
+        this.state = RepairOrderState.REJECTED;
+        registry.updateRepairOrder(this.getRepairOrderDTO());
+    }
+
     public void addDiagnosticResult(DiagnosticTaskDTO diagTaskResult) {
         diagnosticResults.add(diagTaskResult);
         this.state = RepairOrderState.READY_FOR_APPROVAL;

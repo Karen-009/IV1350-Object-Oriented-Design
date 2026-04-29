@@ -67,7 +67,7 @@ public class Controller {
     }
 
     /**
-     * Accepts a specific repair order.
+     * Accepts a specific repair order and prints it.
      * 
      * @param repairOrderId The ID of the repair order to accept.
      */
@@ -75,5 +75,15 @@ public class Controller {
     public void acceptRepairOrder(String repairOrderID) {
         repairOrder.acceptRepairOrder(repairOrderRegistry);
         printer.printRepairOrder(repairOrder.getRepairOrderDTO());
+    }
+
+        /**
+     * Rejects a specific repair order.
+     * 
+     * @param repairOrderId The ID of the repair order to reject.
+     */
+
+    public void rejectRepairOrder(String repairOrderID) {
+        repairOrder.rejectRepairOrder(repairOrderRegistry);
     }
 }
