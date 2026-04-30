@@ -56,6 +56,6 @@ public final class CustomerDTO {
     @Override
     public String toString() {
         return "Customer: " + name + ", Phone: " + phoneNumber
-               + ", Bike: " + bikeBrand + " " + bikeModel;
+               + ", Bike: " + bikeBrand + " " + bikeModel + " " + bikeSerialNo;
     }
 }
