@@ -15,4 +15,20 @@ public final class Amount {
         this.amount = amount;
     }
 
+    /**
+     * @return The integer value of this amount.
+     */
+    public int getAmount() {
+        return amount;
+    }
+
+    /**
+     * Returns a string representation of this amount.
+     * 
+     * @return A string containing the numeric value of this amount.
+     */
+    @Override
+    public String toString() {
+        return Integer.toString(amount);
+    }
 }
