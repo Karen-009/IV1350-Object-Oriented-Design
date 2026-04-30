@@ -1,12 +1,9 @@
 package se.kth.iv1350.repairelectricbike.integration;
 
-import se.kth.iv1350.repairelectricbike.model.RepairOrder;
-
 /**
  * The interface to the printer, used for all printouts initiated by this
  * program.
  */
-
 public class Printer {
     /**
      * Prints the specified repairOrder. This dummy implementation prints to
