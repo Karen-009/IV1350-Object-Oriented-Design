@@ -23,7 +23,7 @@ public final class CustomerDTO {
      * @param phoneNumber  The customer's phone number.
      */
 
-    public CustomerDTO(String name, String email, String bikeBrand, String bikeModel, String bikeSeriallNo, String phoneNumber) {
+    public CustomerDTO(String name, String email, String bikeBrand, String bikeModel, String bikeSerialNo, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.bikeBrand = bikeBrand;
