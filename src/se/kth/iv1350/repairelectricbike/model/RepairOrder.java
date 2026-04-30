@@ -25,7 +25,7 @@ public class RepairOrder {
 
     /**
     * Creates a new instance representing a new repair order.
-    * The state is set to <code>NEWLY_CREATED<\code> and a unique ID is generated.
+    * The state is set to <code>NEWLY_CREATED</code> and a unique ID is generated.
     * 
     * @param problemDesc Description of the problem.
     * @param phoneNumber Customer phone number.
