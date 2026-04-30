@@ -5,6 +5,11 @@ import java.util.List;
 
 import se.kth.iv1350.repairelectricbike.model.RepairOrder;
 
+/**
+ * Contains all calls to the data store with repair orders.
+ * Since there is no database, repair orders are stored
+ * directly in this class as a list.
+ */
 public class RepairOrderRegistry {
     /**
      * Internal list of entities
@@ -12,10 +17,9 @@ public class RepairOrderRegistry {
     private final List<RepairOrder> repairOrders = new ArrayList<>();
 
     /**
-     * ~ <<create>> RepairOrderRegistry() that packages the constructor
+     * Creates a new instance.
      */
     RepairOrderRegistry() {
-        // Call
     }
 
     /**
@@ -27,7 +31,7 @@ public class RepairOrderRegistry {
     public RepairOrderDTO findRepairOrder(String phoneNumber) {
         for (RepairOrder order : repairOrders) {
             if (order.getPhoneNumber().equals(phoneNumber)) {
-                return order.toDTO();
+                return order.getRepairOrderDTO();
             }
         }
         return null;
@@ -57,7 +61,7 @@ public class RepairOrderRegistry {
     public List<RepairOrderDTO> findAllRepairOrders() {
         List<RepairOrderDTO> dtos = new ArrayList<>();
         for (RepairOrder order : repairOrders) {
-            dtos.add(order.toDTO());
+            dtos.add(order.getRepairOrderDTO());
         }
         return dtos;
     }
@@ -77,9 +81,9 @@ public class RepairOrderRegistry {
     }
 
     /**
-     * + saveRepairOrder(repairOrder : RepairOrderDTO) : void
-     * Persists a new repair order.
-     * * @param repairOrder The DTO data to be saved.
+     * Saves a new repair order to the registry.
+     * 
+     * * @param repairOrder The repair order to be saved.
      */
     public void saveRepairOrder(RepairOrderDTO repairOrder) {
         RepairOrder newOrder = new RepairOrder(repairOrder);

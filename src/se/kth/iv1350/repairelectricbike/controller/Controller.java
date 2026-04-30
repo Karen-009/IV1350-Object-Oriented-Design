@@ -53,7 +53,7 @@ public class Controller {
     }
 
     /**
-     * Finds a customer by phone number
+     * Finds a customer by phone number.
      * 
      * @param phoneNumber The phone number used to identify the customer.
      * @return A DTO containing the customer information, or null if no customer is
@@ -114,8 +114,8 @@ public class Controller {
     public void acceptRepairOrder(String repairOrderID) {
         repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderID);
         repairOrder.acceptRepairOrder();
-        repairOrderRegistry.updateRepairOrder(repairOrder.toDTO());
-        printer.printRepairOrder(repairOrder.toDTO());
+        repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
+        printer.printRepairOrder(repairOrder.getRepairOrderDTO());
     }
 
     /**
@@ -127,6 +127,6 @@ public class Controller {
     public void rejectRepairOrder(String repairOrderID) {
         repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderID);
         repairOrder.rejectRepairOrder();
-        repairOrderRegistry.updateRepairOrder(repairOrder.toDTO());
+        repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
     }
 }
