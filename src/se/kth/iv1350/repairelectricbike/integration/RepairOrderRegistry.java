@@ -54,7 +54,7 @@ public class RepairOrderRegistry {
     }
 
     /**
-     * Finds and retrieves all the repaird orders in the system.
+     * Finds and retrieves all the repair orders in the system.
      * 
      * @return A list of DTOs that represent every repair order in the system.
      */
@@ -67,7 +67,7 @@ public class RepairOrderRegistry {
     }
 
     /**
-     * Updates an existing repair order in the registary.
+     * Updates an existing repair order in the registry.
      * 
      * @param updatedRepairOrder The DTO containing the updated information.
      */
