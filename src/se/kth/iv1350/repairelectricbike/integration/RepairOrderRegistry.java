@@ -24,9 +24,9 @@ public class RepairOrderRegistry {
 
     /**
      * Searches for a repair order by phone number.
-     * * @param phoneNumber The unique identifier for the search.
+     * @param phoneNumber The unique identifier for the search.
      * 
-     * * @return The found order as a DTO, or null if no match exists.
+     * @return The found order as a DTO, or null if no match exists.
      */
     public RepairOrderDTO findRepairOrder(String phoneNumber) {
         for (RepairOrder order : repairOrders) {
@@ -40,8 +40,8 @@ public class RepairOrderRegistry {
     /**
      * Finds the repair order with the specified ID.
      *
-     * * @param repairOrderId The ID of the repair order to find.
-     * * @return The repair order with the specified ID,
+     * @param repairOrderId The ID of the repair order to find.
+     * @return The repair order with the specified ID,
      * or null if no such order exists.
      */
     public RepairOrder findRepairOrderById(String repairOrderId) {
@@ -56,7 +56,7 @@ public class RepairOrderRegistry {
     /**
      * Finds and retrieves all the repaird orders in the system.
      * 
-     * * @return A list of DTOs that represent every repair order in the system.
+     * @return A list of DTOs that represent every repair order in the system.
      */
     public List<RepairOrderDTO> findAllRepairOrders() {
         List<RepairOrderDTO> dtos = new ArrayList<>();
@@ -69,7 +69,7 @@ public class RepairOrderRegistry {
     /**
      * Updates an existing repair order in the registary.
      * 
-     * * @param updatedRepairOrder The DTO containing the updated information.
+     * @param updatedRepairOrder The DTO containing the updated information.
      */
     public void updateRepairOrder(RepairOrderDTO updateRepairOrder) {
         for (RepairOrder orders : repairOrders) {
@@ -83,7 +83,7 @@ public class RepairOrderRegistry {
     /**
      * Saves a new repair order to the registry.
      * 
-     * * @param repairOrder The repair order to be saved.
+     * @param repairOrder The repair order to be saved.
      */
     public void saveRepairOrder(RepairOrderDTO repairOrder) {
         RepairOrder newOrder = new RepairOrder(repairOrder);
