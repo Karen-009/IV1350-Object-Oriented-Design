@@ -101,6 +101,7 @@ public class Controller {
      * @param repairTask    The repair task to add.
      */
     public void addRepairTask(String repairOrderId, RepairTaskDTO repairTask) {
+        repairOrder = repairOrderRegistry.findRepairOrderById(repairOrderId);
         repairOrder.addRepairTask(repairTask);
         repairOrderRegistry.updateRepairOrder(repairOrder.getRepairOrderDTO());
     }
