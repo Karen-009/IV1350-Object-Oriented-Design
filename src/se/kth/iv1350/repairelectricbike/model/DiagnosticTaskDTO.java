@@ -11,7 +11,7 @@ public class DiagnosticTaskDTO {
     private final String result;
 
     /**
-     * Creates a new instance.     
+     * Creates a new instance.
      * 
      * @param name        The name of the diagnostic task.
      * @param description A description of what was checked.
