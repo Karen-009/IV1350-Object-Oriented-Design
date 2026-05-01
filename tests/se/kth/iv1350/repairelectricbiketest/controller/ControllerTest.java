@@ -1,27 +1,47 @@
 package IV1350_ObjectOrientedDesign.tests.se.kth.iv1350.repairelectricbiketest.controller;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.beans.Transient;
+//import java.beans.Transient;
+import java.util.List;
 
+import se.kth.iv1350.repairelectricbike.model.Bike;
 import se.kth.iv1350.repairelectricbike.integration.Printer;
 import se.kth.iv1350.repairelectricbike.integration.RegistryCreator;
 import se.kth.iv1350.repairelectricbike.integration.RepairOrderDTO;
 import se.kth.iv1350.repairelectricbike.controller.Controller;
 import se.kth.iv1350.repairelectricbike.view.Printer;
+import se.kth.iv1350.repairelectricbike.model.DiagnosticTaskDTO;
+import se.kth.iv1350.repairelectricbike.model.RepairTaskDTO;
+import se.kth.iv1350.repairelectricbike.integration.CustomerDTO;
 
 public class ControllerTest {
     private Controller controller;
     private RegistryCreator creator;
     private Printer printer;
 
+    /**
+     * Initialize fresh objects for every test to ensure independence.
+     */
     @BeforeEach
     public void setUp() {
         creator = new RegistryCreator();
         printer = new Printer();
         controller = new Controller(creator, printer);
+    }
+
+    /**
+     * Clean up references to help the garbage collector.
+     */
+    @AfterEach
+    public void tearDown() {
+        controller = null;
+        creator = null;
+        printer = null;
     }
 
     /**
@@ -36,9 +56,75 @@ public class ControllerTest {
 
         RepairOrderDTO newOrder = controller.createRepairOrder(desc, phone, bike);
         assertNotNull(newOrder, "RepairOrderDTO should not be null");
-        assertEquals(desc, result.getProblemDescription());
+        assertEquals(desc, result.getProblemDescription(), "DTO contains incorrect description.");
 
         RepairOrderDTO savedOrder = controller.findRepairOrder(phone);
         assertNotNull(savedOrder, "The order should be found in the registry after creation");
+    }
+
+    @Test
+    public void testFindCustomerFoudn() {
+        String phoneNumber = "0701234567";
+        CustomerDTO result = controller.findCustomer(phone);
+        assertNotNull(result, "Should find a customer that exists in the registry.");
+    }
+
+    @Test
+    public void testFindCustomerNotFound() {
+        CustomerDTO result = controller.findCustomer("999-999-999");
+        assertNull(result, "Should return null when customer is not found");
+    }
+
+    @Test
+    public void testAddDiagnosticResult() {
+        RepairOrderDTO order = controller.createRepairOrder("Fix it", "070111", new Bike("B1"));
+        String id = order.getRepairOrderId();
+
+        DiagnosticTaskDTO diag = new DiagnosticTaskDTO("Battery failure", 500);
+        controller.addDiagnosticResult(id, diag);
+
+        RepairOrderDTO updated = controller.findRepairOrder("070111");
+        assertNotNull(updated, "Updated order should exist in registry.");
+    }
+
+    @Test
+    public void testAddRepairTask() {
+        RepairOrderDTO order = controller.createRepairOrder("Broken pedal", "070222", new Bike("B2"));
+        RepairTaskDTO task = new RepairTaskDTO("Replace pedal", 200);
+
+        controller.addRepairTask(order.getRepairOrderId(), task);
+
+        RepairOrderDTO updated = controller.findRepairOrder("070222");
+        assertNotNull(updated, "Order should be retrievable after adding a task.");
+
+    }
+
+    @Test
+    public void testAcceptRepairOrder() {
+        RepairOrderDTO order = controller.createRepairOrder("Squeaky wheel", "070333", new Bike("B3"));
+        controller.acceptRepairOrder(order.getRepairOrderId());
+
+        RepairOrderDTO updateOrder = controller.findRepairOrder("070333");
+        assertTrue(updatedOrder.isAccepted(), "The order status should be accepted");
+    }
+
+    @Test
+    public void testRejectAcceptRepairOrder() {
+        RepairOrderDTO order = controller.createRepairOrder("Too expensive", "070444", new Bike("B4"));
+        controller.rejectRepairOrder(order.getRepairOrderId());
+
+        RepairOrderDTO updated = controller.findRepairOrder("070444");
+        assertNotNull(updated);
+    }
+
+    @Test
+    public void testFindAllRepairOrders() {
+        controller.createRepairOrder("Order 1", "111", new Bike("X1"));
+        controller.createRepairOrder("Order 2", "222", new Bike("X2"));
+
+        List<RepairOrderDTO> orders = controller.findAllRepairOrders();
+
+        assertNotNull(orders, "The list of orders should not be null.");
+        assertTrue(orders.size() >= 2, "The list should contain at least the 2 orders created.");
     }
 }
