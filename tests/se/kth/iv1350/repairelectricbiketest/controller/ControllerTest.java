@@ -9,15 +9,17 @@ import java.beans.Transient;
 //import java.beans.Transient;
 import java.util.List;
 
+import se.kth.iv1350.repairelectricbike.model.Amount;
 import se.kth.iv1350.repairelectricbike.model.Bike;
 import se.kth.iv1350.repairelectricbike.integration.Printer;
 import se.kth.iv1350.repairelectricbike.integration.RegistryCreator;
 import se.kth.iv1350.repairelectricbike.integration.RepairOrderDTO;
 import se.kth.iv1350.repairelectricbike.controller.Controller;
-import se.kth.iv1350.repairelectricbike.view.Printer;
 import se.kth.iv1350.repairelectricbike.model.DiagnosticTaskDTO;
 import se.kth.iv1350.repairelectricbike.model.RepairTaskDTO;
 import se.kth.iv1350.repairelectricbike.integration.CustomerDTO;
+import se.kth.iv1350.repairelectricbike.integration.RepairOrderState;
+import se.kth.iv1350.repairelectricbike.model.RepairTaskState;
 
 public class ControllerTest {
     private Controller controller;
@@ -52,11 +54,11 @@ public class ControllerTest {
     public void testCreateRepairOrder() {
         String desc = "Flat tire";
         String phone = "0701234567";
-        Bike bike = new Bike("SN123");
+        Bike bike = new Bike("GIANT", "SNS", "01");
 
         RepairOrderDTO newOrder = controller.createRepairOrder(desc, phone, bike);
         assertNotNull(newOrder, "RepairOrderDTO should not be null");
-        assertEquals(desc, result.getProblemDescription(), "DTO contains incorrect description.");
+        assertEquals(desc, newOrder.getCustomersProblemDescription(), "DTO contains incorrect description.");
 
         RepairOrderDTO savedOrder = controller.findRepairOrder(phone);
         assertNotNull(savedOrder, "The order should be found in the registry after creation");
@@ -65,7 +67,7 @@ public class ControllerTest {
     @Test
     public void testFindCustomerFoudn() {
         String phoneNumber = "0701234567";
-        CustomerDTO result = controller.findCustomer(phone);
+        CustomerDTO result = controller.findCustomer(phoneNumber);
         assertNotNull(result, "Should find a customer that exists in the registry.");
     }
 
@@ -77,10 +79,11 @@ public class ControllerTest {
 
     @Test
     public void testAddDiagnosticResult() {
-        RepairOrderDTO order = controller.createRepairOrder("Fix it", "070111", new Bike("B1"));
-        String id = order.getRepairOrderId();
+        RepairOrderDTO order = controller.createRepairOrder("Fix it", "070111", new Bike("GIANT", "SNS", "02"));
+        String id = order.getId();
 
-        DiagnosticTaskDTO diag = new DiagnosticTaskDTO("Battery failure", 500);
+        DiagnosticTaskDTO diag = new DiagnosticTaskDTO("Battery failure", "Have battery problems", new Amount(500),
+                "Old battery");
         controller.addDiagnosticResult(id, diag);
 
         RepairOrderDTO updated = controller.findRepairOrder("070111");
@@ -89,10 +92,10 @@ public class ControllerTest {
 
     @Test
     public void testAddRepairTask() {
-        RepairOrderDTO order = controller.createRepairOrder("Broken pedal", "070222", new Bike("B2"));
-        RepairTaskDTO task = new RepairTaskDTO("Replace pedal", 200);
+        RepairOrderDTO order = controller.createRepairOrder("Broken pedal", "070222", new Bike("GIANT", "SNS", "03"));
+        RepairTaskDTO task = new RepairTaskDTO("Pedal", "Replace pedal", new Amount(200), RepairTaskState.INCOMPLETE);
 
-        controller.addRepairTask(order.getRepairOrderId(), task);
+        controller.addRepairTask(order.getId(), task);
 
         RepairOrderDTO updated = controller.findRepairOrder("070222");
         assertNotNull(updated, "Order should be retrievable after adding a task.");
@@ -101,26 +104,26 @@ public class ControllerTest {
 
     @Test
     public void testAcceptRepairOrder() {
-        RepairOrderDTO order = controller.createRepairOrder("Squeaky wheel", "070333", new Bike("B3"));
-        controller.acceptRepairOrder(order.getRepairOrderId());
+        RepairOrderDTO order = controller.createRepairOrder("Squeaky wheel", "070333", new Bike("GIANT", "SNS", "04"));
+        controller.acceptRepairOrder(order.getId());
 
-        RepairOrderDTO updateOrder = controller.findRepairOrder("070333");
-        assertTrue(updatedOrder.isAccepted(), "The order status should be accepted");
+        RepairOrderDTO updatedOrder = controller.findRepairOrder("070333");
+        assertTrue(updatedOrder.getState() == RepairOrderState.ACCEPTED, "The order status should be accepted");
     }
 
     @Test
     public void testRejectAcceptRepairOrder() {
-        RepairOrderDTO order = controller.createRepairOrder("Too expensive", "070444", new Bike("B4"));
-        controller.rejectRepairOrder(order.getRepairOrderId());
+        RepairOrderDTO order = controller.createRepairOrder("Too expensive", "070444", new Bike("GIANT", "SNS", "05"));
+        controller.rejectRepairOrder(order.getId());
 
         RepairOrderDTO updated = controller.findRepairOrder("070444");
-        assertNotNull(updated);
+        assertTrue(updated.getState() == RepairOrderState.REJECTED, "The order status should be rejected");
     }
 
     @Test
     public void testFindAllRepairOrders() {
-        controller.createRepairOrder("Order 1", "111", new Bike("X1"));
-        controller.createRepairOrder("Order 2", "222", new Bike("X2"));
+        controller.createRepairOrder("Order 1", "111", new Bike("GIANT", "SNS", "06"));
+        controller.createRepairOrder("Order 2", "222", new Bike("GIANT", "SNS", "07"));
 
         List<RepairOrderDTO> orders = controller.findAllRepairOrders();
 
