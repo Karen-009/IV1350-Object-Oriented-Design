@@ -66,7 +66,7 @@ public class RepairOrderTest {
     }
 
     @Test
-    public void testAddRepairTaskU() {
+    public void testAddRepairTask() {
         RepairTaskDTO task = new RepairTaskDTO("Tighten chain", "Adjust chain tension", new Amount(200),
                 RepairTaskState.INCOMPLETE);
         repairOrder.addRepairTask(task);
