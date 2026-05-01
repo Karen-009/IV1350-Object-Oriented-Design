@@ -71,6 +71,8 @@ public class RepairOrderTest {
                 RepairTaskState.INCOMPLETE);
         repairOrder.addRepairTask(task);
         assertNotNull(repairOrder.getRepairOrderDTO(), "DTO should still be accessible after adding a task.");
+        assertEquals(RepairOrderState.NEWLY_CREATED, repairOrder.getRepairOrderDTO().getState(),
+        "State should not change after adding a repair task.");
     }
 
     @Test
