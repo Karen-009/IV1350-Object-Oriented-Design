@@ -63,7 +63,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testFindCustomerFoudn() {
+    public void testFindCustomerFound() {
         String phoneNumber = "0701234567";
         CustomerDTO result = controller.findCustomer(phoneNumber);
         assertNotNull(result, "Should find a customer that exists in the registry.");
