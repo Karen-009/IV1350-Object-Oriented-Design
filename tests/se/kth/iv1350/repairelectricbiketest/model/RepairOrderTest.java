@@ -1,4 +1,4 @@
-package IV1350_ObjectOrientedDesign.tests.se.kth.iv1350.repairelectricbiketest.model;
+package se.kth.iv1350.repairelectricbiketest.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

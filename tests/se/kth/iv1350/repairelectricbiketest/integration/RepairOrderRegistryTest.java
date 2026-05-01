@@ -1,4 +1,4 @@
-package IV1350_ObjectOrientedDesign.tests.se.kth.iv1350.repairelectricbiketest.integration;
+package se.kth.iv1350.repairelectricbiketest.integration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -61,7 +61,8 @@ public class RepairOrderRegistryTest {
         List<RepairOrderDTO> allOrders = registry.findAllRepairOrders();
 
         assertEquals(1, allOrders.size(), "Registry should contain exactly 1 order.");
-        assertEquals(testRepairOrder.getId(), allOrders.get(0).getId(), "The DTO in the list should match our saved order.");
+        assertEquals(testRepairOrder.getId(), allOrders.get(0).getId(),
+                "The DTO in the list should match our saved order.");
     }
 
     @Test

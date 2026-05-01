@@ -1,12 +1,10 @@
-package IV1350_ObjectOrientedDesign.tests.se.kth.iv1350.repairelectricbiketest.controller;
+package se.kth.iv1350.repairelectricbiketest.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.beans.Transient;
-//import java.beans.Transient;
 import java.util.List;
 
 import se.kth.iv1350.repairelectricbike.model.Amount;
