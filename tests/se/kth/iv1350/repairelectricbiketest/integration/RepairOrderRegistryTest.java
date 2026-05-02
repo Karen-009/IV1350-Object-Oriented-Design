@@ -80,4 +80,25 @@ public class RepairOrderRegistryTest {
         assertEquals(RepairOrderState.ACCEPTED, found.getRepairOrderDTO().getState(),
                 "The state in the registry should have been updated.");
     }
+
+    @Test
+    public void testUpdateRepairOrderNonExisting() {
+        RepairOrderDTO missingDto = new RepairOrderDTO(
+                "non-existing-id",
+                "2024-01-01",
+                "Desc",
+                "2024-01-02",
+                RepairOrderState.ACCEPTED);
+
+        registry.updateRepairOrder(missingDto);
+
+        List<RepairOrderDTO> allOrders = registry.findAllRepairOrders();
+
+        assertEquals(1, allOrders.size(),
+                "Registry should remain unchanged when updating non-existing order.");
+
+        assertEquals(RepairOrderState.NEWLY_CREATED,
+                allOrders.get(0).getState(),
+                "Existing order should not be modified.");
+    }
 }
