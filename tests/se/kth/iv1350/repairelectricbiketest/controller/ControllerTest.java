@@ -129,4 +129,10 @@ public class ControllerTest {
         assertNotNull(orders, "The list of orders should not be null.");
         assertTrue(orders.size() >= 2, "The list should contain at least the 2 orders created.");
     }
+
+    @Test
+    public void testFindRepairOrderNonExisting() {
+        RepairOrderDTO result = controller.findRepairOrder("notExisting");
+        assertNull(result);
+    }
 }
