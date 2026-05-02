@@ -34,7 +34,7 @@ public class RepairOrderTest {
     }
 
     @Test
-    public void testInitilizationState() {
+    public void testInitializationState() {
         RepairOrderDTO dto = repairOrder.getRepairOrderDTO();
         assertEquals(RepairOrderState.NEWLY_CREATED, dto.getState(),
                 "A new repair order should have state NEWLY_CREATED.");
